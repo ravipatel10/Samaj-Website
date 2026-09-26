@@ -53,27 +53,10 @@ svg.icon { flex-shrink: 0; }
   flex: 1; max-width: 420px; background: rgba(255,255,255,.1); color: inherit;
   border: 1px solid rgba(255,255,255,.25); border-radius: 6px; padding: .45em .6em;
 }
-.proto-toggle { display: flex; gap: 6px; margin-left: auto; }
-.proto-toggle-btn {
-  display: flex; align-items: center; gap: 5px;
-  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.25); color: inherit;
-  border-radius: 6px; padding: .4em .7em; cursor: pointer; font-size: .82rem;
-}
-.proto-toggle-btn.active { background: var(--primary); border-color: var(--primary); color: var(--on-primary, #fff); }
 .proto-viewport { min-height: calc(100vh - 52px); }
-/* .mobile-frame is the decorative "phone bezel" used only when the manual
-   Desktop/Mobile toggle fakes a phone on an actually-wide window; it also
-   becomes the containing block for position:fixed descendants (the bottom
-   tab bar), so the fixed bar stays inside the fake phone instead of pinning
-   to the real (wide) browser viewport. */
-.proto-viewport.mobile-frame {
-  max-width: 400px; margin: 18px auto; border: 8px solid #1b1b1f; border-radius: 32px;
-  overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,.25);
-  transform: translateZ(0);
-}
-/* .mobile-layout is the real responsive reflow — applied both when the
-   toggle fakes mobile AND when the page is genuinely viewed on a narrow
-   screen, so a real phone gets correct layout without the decorative frame. */
+/* .mobile-layout is the real responsive reflow, applied automatically
+   whenever the page is actually viewed on a narrow (phone-width) screen —
+   the layout simply follows the real device, no manual toggle involved. */
 .proto-viewport.mobile-layout .site-header .nav-links,
 .proto-viewport.mobile-layout .site-header .header-actions { display: none; }
 .proto-viewport.mobile-layout .card-grid { grid-template-columns: 1fr 1fr !important; }
@@ -107,6 +90,8 @@ svg.icon { flex-shrink: 0; }
 .proto-viewport.mobile-layout .mobile-home-head { display: block; }
 .proto-viewport.mobile-layout .desktop-only-hero,
 .proto-viewport.mobile-layout .desktop-only { display: none; }
+.proto-viewport.mobile-layout .sidebar.open .drawer-close,
+.proto-viewport.mobile-layout .mobile-drawer.open .drawer-close { display: flex; }
 
 /* ---------- bottom tab bar (mobile app-style navigation) ---------- */
 .bottom-tab-bar {
@@ -200,6 +185,17 @@ svg.icon { flex-shrink: 0; }
 }
 .mobile-drawer.open .nav-link { padding: 10px 0; border-bottom: 1px solid var(--border); }
 .drawer-actions { display: flex; gap: 10px; margin-top: 10px; }
+/* Close (X) control shown inside the mobile drawer/sidebar only while it is
+   open on a narrow viewport; sticky + order:-1 keeps it pinned top-right
+   regardless of how a theme reorders the rest of the panel's content. */
+.drawer-close {
+  display: none; order: -1; align-self: flex-end;
+  align-items: center; justify-content: center;
+  width: 34px; height: 34px; margin-bottom: 6px; border-radius: 50%;
+  border: none; background: rgba(127,127,127,.16); color: inherit; cursor: pointer;
+  position: sticky; top: 0; z-index: 2; flex-shrink: 0;
+}
+.drawer-close:hover { background: rgba(127,127,127,.3); }
 .page { max-width: 1120px; margin: 0 auto; padding: 36px 32px 60px; }
 .site-footer { background: var(--footer-bg, #1b1b1f); color: var(--footer-text, #d7d7dc); padding: 44px 32px 20px; }
 .site-footer .brand { color: var(--footer-text, #d7d7dc); }
@@ -406,4 +402,6 @@ svg.icon { flex-shrink: 0; }
   .bottom-tab-bar { display: flex; }
   .mobile-home-head { display: block; }
   .desktop-only-hero, .desktop-only { display: none; }
+  .sidebar.open .drawer-close,
+  .mobile-drawer.open .drawer-close { display: flex; }
 }

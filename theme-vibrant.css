@@ -99,8 +99,6 @@ h1, h2, h3, h4 { font-weight: 600; }
 .data-table th { background: var(--bg-alt); }
 .tab.active { color: var(--primary); border-bottom-color: var(--primary); }
 .switch.on { background: var(--primary); }
-.proto-toggle-btn { border-radius: 999px; }
-.proto-toggle-btn.active { background: var(--primary); border-color: var(--primary); }
 .section-head h3::after { content: ''; }
 
 /* ---------- thumb-reachable right-side drawer (mobile "More" panel) ----------

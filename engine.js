@@ -229,7 +229,11 @@ function publicShell(activeId, inner) {
         btn('Register', { variant: 'primary', goto: 'AUTH-02', small: true }) +
       '</div>' +
     '</header>' +
-    '<div class="mobile-drawer" data-drawer>' + links + '<div class="drawer-actions">' + btn('Login', { goto: 'AUTH-01' }) + btn('Register', { variant: 'primary', goto: 'AUTH-02' }) + '</div></div>' +
+    '<div class="mobile-drawer" data-drawer>' +
+      '<button type="button" class="drawer-close" data-drawer-close aria-label="Close menu">' + icon('x', 18) + '</button>' +
+      links +
+      '<div class="drawer-actions">' + btn('Login', { goto: 'AUTH-01' }) + btn('Register', { variant: 'primary', goto: 'AUTH-02' }) + '</div>' +
+    '</div>' +
     '<main class="page">' + inner + '</main>' +
     publicFooter() +
     bottomTabBar(bottomItems, activeId);
@@ -265,6 +269,7 @@ function sideShell(links, inner, label, userName, homeId, isAdmin, bottomItems, 
   return '' +
     '<div class="side-shell">' +
       '<aside class="sidebar" data-drawer>' +
+        '<button type="button" class="drawer-close" data-drawer-close aria-label="Close menu">' + icon('x', 18) + '</button>' +
         '<div class="brand" data-goto="' + homeId + '">' + icon('home', 20) + '<span>' + ORG.name + '</span></div>' +
         '<div class="sidebar-tag">' + label + '</div>' +
         '<nav class="sidebar-nav">' + links + '</nav>' +
@@ -718,8 +723,6 @@ SCREENS['ADM-16'] = { group: 'Admin Panel', name: 'Roles & Permissions', render:
 SCREENS['ADM-17'] = { group: 'Admin Panel', name: 'Settings', render: renderAdminSettings };
 
 /* ---------- app shell: prototype chrome, router, viewport toggle ---------- */
-var manualMode = null; // null = auto by real width; 'desktop' | 'mobile' = forced
-
 function buildChrome() {
   var groups = ['Public', 'Authentication', 'Member Area', 'Admin Panel'];
   var navHtml = groups.map(function (g) {
@@ -730,10 +733,6 @@ function buildChrome() {
     '<div class="proto-bar">' +
       '<div class="proto-brand">' + icon('grid', 16) + '<span>' + (window.CONCEPT_NAME || 'Concept') + '</span></div>' +
       '<select class="proto-jump" id="proto-jump">' + navHtml + '</select>' +
-      '<div class="proto-toggle">' +
-        '<button class="proto-toggle-btn" data-mode="desktop">' + icon('monitor', 15) + ' Desktop</button>' +
-        '<button class="proto-toggle-btn" data-mode="mobile">' + icon('smartphone', 15) + ' Mobile</button>' +
-      '</div>' +
     '</div>' +
     '<div class="proto-viewport" id="proto-viewport"><div id="app"></div></div>';
 }
@@ -754,9 +753,17 @@ function renderCurrent() {
     });
   });
   document.querySelectorAll('[data-menu-toggle]').forEach(function (el) {
-    el.addEventListener('click', function () {
+    el.addEventListener('click', function (e) {
+      e.stopPropagation();
       var d = document.querySelector('.mobile-drawer, .sidebar');
       if (d) d.classList.toggle('open');
+    });
+  });
+  document.querySelectorAll('[data-drawer-close]').forEach(function (el) {
+    el.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var d = document.querySelector('.mobile-drawer.open, .sidebar.open');
+      if (d) d.classList.remove('open');
     });
   });
   document.querySelectorAll('form').forEach(function (f) {
@@ -786,22 +793,26 @@ function renderCurrent() {
 function applyMode() {
   var vp = document.getElementById('proto-viewport');
   if (!vp) return;
-  var isNarrow = window.innerWidth < 720;
-  var mode = manualMode || (isNarrow ? 'mobile' : 'desktop');
-  vp.classList.toggle('mobile-layout', mode === 'mobile');
-  vp.classList.toggle('mobile-frame', mode === 'mobile' && !isNarrow);
-  document.querySelectorAll('.proto-toggle-btn').forEach(function (b) {
-    b.classList.toggle('active', b.getAttribute('data-mode') === mode);
-  });
+  vp.classList.toggle('mobile-layout', window.innerWidth < 720);
 }
 function mountApp() {
   document.body.insertAdjacentHTML('afterbegin', buildChrome());
   document.getElementById('proto-jump').addEventListener('change', function (e) { location.hash = e.target.value; });
-  document.querySelectorAll('.proto-toggle-btn').forEach(function (b) {
-    b.addEventListener('click', function () { manualMode = b.getAttribute('data-mode'); applyMode(); });
-  });
-  window.addEventListener('resize', function () { if (!manualMode) applyMode(); });
+  window.addEventListener('resize', applyMode);
   window.addEventListener('hashchange', function () { renderCurrent(); });
+  // Close the mobile "More" drawer/sidebar when tapping anywhere outside it.
+  document.addEventListener('click', function (e) {
+    var openDrawer = document.querySelector('.mobile-drawer.open, .sidebar.open');
+    if (!openDrawer) return;
+    if (openDrawer.contains(e.target)) return;
+    if (e.target.closest('[data-menu-toggle]')) return;
+    openDrawer.classList.remove('open');
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    var openDrawer = document.querySelector('.mobile-drawer.open, .sidebar.open');
+    if (openDrawer) openDrawer.classList.remove('open');
+  });
   renderCurrent();
   applyMode();
 }
