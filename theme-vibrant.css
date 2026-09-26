@@ -1,0 +1,129 @@
+/* ============================================================
+   Concept 3 — Vibrant & Cultural
+   Marigold + magenta + teal, big rounded shapes, playful shadows,
+   a rounded display face for headings — festive without leaning
+   on any specific religious iconography.
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Nunito+Sans:wght@400;600;700&display=swap');
+
+:root {
+  color-scheme: light;
+  --bg: #fff8ec;
+  --bg-alt: #fef0d9;
+  --surface: #ffffff;
+  --text: #2b1d1a;
+  --text-muted: #7d6a5c;
+  --border: #f2ddb6;
+
+  --primary: #c0327a;
+  --primary-hover: #9e2864;
+  --on-primary: #ffffff;
+  --accent: #f4a520;
+  --on-accent: #2b1d1a;
+  --brand-color: #c0327a;
+
+  --header-bg: #ffffff;
+  --footer-bg: #3a1030;
+  --footer-text: #edd3e4;
+  --footer-heading: #ffffff;
+  --sidebar-bg: #3a1030;
+  --sidebar-text: #edd3e4;
+  --sidebar-muted: #b98aa9;
+
+  --proto-bar-bg: #3a1030;
+  --proto-bar-text: #f8ecf3;
+
+  --success-bg: #e2f3e0; --success-text: #1f7a3d;
+  --warning-bg: #fdedc7; --warning-text: #96650a;
+  --neutral-bg: #f3e6cf; --neutral-text: #6b5738;
+  --danger-bg: #fbe0e8;  --danger-text: #a3245c;
+
+  --avatar-0: #c0327a; --avatar-1: #f4a520; --avatar-2: #0f8b8d;
+  --avatar-3: #7a4fc0; --avatar-4: #e0632e; --avatar-5: #2f9b5c;
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --shadow-md: 0 10px 24px rgba(192, 50, 122, .18);
+
+  --font-heading: 'Baloo 2', 'Segoe UI', sans-serif;
+  --font-body: 'Nunito Sans', 'Segoe UI', sans-serif;
+  --chart-line: #c0327a;
+
+  /* mobile app-style components */
+  --tabbar-bg: #ffffff;
+  --tabbar-text: #a9808f;
+  --status-gradient: linear-gradient(135deg, #9e2864 0%, #e0632e 100%);
+  --status-card-text: #ffffff;
+  --tint-a-bg: #fbe2ee; --tint-a-fg: #c0327a;
+  --tint-b-bg: #fdedc7; --tint-b-fg: #a8720a;
+  --tint-c-bg: #dcf3ee; --tint-c-fg: #0f8b8d;
+}
+
+h1, h2, h3, h4 { font-weight: 600; }
+.eyebrow { color: var(--primary); font-weight: 700; }
+.hero {
+  background: linear-gradient(135deg, #fff0da 0%, #fde3ee 100%);
+  border-radius: var(--radius-lg); padding: 46px 32px; max-width: 880px;
+}
+.hero h1 { font-size: 2.4rem; }
+.stat-bar { margin-top: 28px; }
+.stat-item { border-radius: var(--radius-lg); border: none; background: var(--surface); box-shadow: var(--shadow-md); }
+.stat-item b { color: var(--primary); }
+
+.site-header { border-bottom: none; box-shadow: 0 2px 10px rgba(43,29,26,.06); }
+.brand { color: var(--primary); }
+.nav-link.active, .nav-link:hover { color: var(--primary); border-bottom-color: var(--accent); border-bottom-width: 3px; border-radius: 2px; }
+
+.mini-card, .approval-card, .faq-item, .empty-state, .auth-card, .stat-tile, .chart-placeholder, .dropzone {
+  border: none; box-shadow: var(--shadow-md); border-radius: var(--radius-md);
+}
+.mini-card:hover { box-shadow: 0 14px 30px rgba(192, 50, 122, .26); }
+.mini-card-img--events { background: linear-gradient(135deg, var(--accent), #f4c95a); color: #2b1d1a; }
+.mini-card-img--gallery { background: linear-gradient(135deg, var(--primary), #e35a9c); }
+.locked-note, .map-placeholder { border: 2px dashed var(--border); border-radius: var(--radius-md); }
+
+.btn { border-radius: 999px; font-weight: 700; }
+.btn-primary { background: linear-gradient(135deg, var(--primary), #e35a9c); }
+.btn-ghost { border: 2px solid var(--border); }
+.btn-ghost:hover { border-color: var(--primary); color: var(--primary); }
+.icon-btn { border-radius: 999px; }
+
+.field input, .field textarea, .field select, select, input, textarea { border-radius: var(--radius-sm); }
+.badge { border-radius: 999px; font-weight: 700; }
+.avatar { box-shadow: 0 3px 8px rgba(43,29,26,.18); }
+
+.sidebar-link { border-radius: 999px; }
+.sidebar-link.active { background: linear-gradient(135deg, var(--primary), #e35a9c); }
+.table-wrap { border-radius: var(--radius-md); border: none; box-shadow: var(--shadow-md); }
+.data-table th { background: var(--bg-alt); }
+.tab.active { color: var(--primary); border-bottom-color: var(--primary); }
+.switch.on { background: var(--primary); }
+.proto-toggle-btn { border-radius: 999px; }
+.proto-toggle-btn.active { background: var(--primary); border-color: var(--primary); }
+.section-head h3::after { content: ''; }
+
+/* ---------- thumb-reachable right-side drawer (mobile "More" panel) ----------
+   The panel opens from the right edge, so everything a thumb needs to tap —
+   the full nav list AND the exit / login-register controls — sits clustered
+   at the bottom of the panel, with the button as the very last (bottom-most,
+   easiest to reach) item. Only brand/section-label stay pinned at the top.
+   Scoped to the mobile drawer only — the always-visible desktop sidebar is
+   untouched. */
+.proto-viewport.mobile-layout .sidebar.open > .brand { order: 0; }
+.proto-viewport.mobile-layout .sidebar.open > .sidebar-tag { order: 1; }
+.proto-viewport.mobile-layout .sidebar.open > .sidebar-nav { order: 2; flex: none; margin-top: auto; }
+.proto-viewport.mobile-layout .sidebar.open > .sidebar-link { order: 3; margin-top: 10px; }
+
+.proto-viewport.mobile-layout .mobile-drawer.open > a.nav-link:first-of-type { margin-top: auto; }
+.proto-viewport.mobile-layout .mobile-drawer.open > .drawer-actions { order: 1; margin-top: 10px; }
+
+@media (max-width: 720px) {
+  .sidebar.open > .brand { order: 0; }
+  .sidebar.open > .sidebar-tag { order: 1; }
+  .sidebar.open > .sidebar-nav { order: 2; flex: none; margin-top: auto; }
+  .sidebar.open > .sidebar-link { order: 3; margin-top: 10px; }
+
+  .mobile-drawer.open > a.nav-link:first-of-type { margin-top: auto; }
+  .mobile-drawer.open > .drawer-actions { order: 1; margin-top: 10px; }
+}
