@@ -1,5 +1,5 @@
 /* ============================================================
-   Kutumb Samaj — Community Platform Prototype Engine
+   Patidar Samaj — Community Platform Prototype Engine
    Shared across all three visual concepts. Renders all 47
    screens from the sitemap as client-side "views" with hash
    routing, so the whole thing is one clickable prototype.
@@ -108,7 +108,7 @@ const CONTACT_MESSAGES = [
   { id: 'cm3', name: 'Unknown', subject: 'buy cheap watches now', status: 'Spam', when: '3 days ago' },
   { id: 'cm4', name: 'Jignesh Patel', subject: "Update to my father's directory listing", status: 'Resolved', when: '5 days ago' },
 ];
-const ORG = { name: 'Kutumb Samaj', tagline: 'A home for our community, wherever we’ve settled', address: '123 Community Lane, Your City', phone: '(000) 000-0000', email: 'info@kutumbsamaj.org' };
+const ORG = { name: 'Patidar Samaj', tagline: 'A home for our community, wherever we’ve settled', address: '123 Community Lane, Your City', phone: '(000) 000-0000', email: 'info@patidarsamaj.org' };
 
 /* ---------- small render helpers ---------- */
 function initials(name) {
