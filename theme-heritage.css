@@ -1,0 +1,216 @@
+/* ============================================================
+   Concept 4 — Heritage & Trust
+   Saffron (bhagwa) + antique gold on warm ivory, with a deep
+   maroon-brown for footer/sidebar — the palette most associated
+   with Hindu community and temple-trust identity, deliberately
+   kept clear of green (commonly read as a different community's
+   color in this context). A monumental serif for headings,
+   restrained rounded corners. Inspired by the feel of real
+   community-trust websites — an official seal, a notice board,
+   a committee roster — built entirely from original type, color
+   and shape choices (no copied text or imagery).
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Marcellus&family=Mulish:wght@400;600;700;800&display=swap');
+
+:root {
+  color-scheme: light;
+  --bg: #fbf6ec;
+  --bg-alt: #f5e9d2;
+  --surface: #ffffff;
+  --text: #2a1c12;
+  --text-muted: #7a6a58;
+  --border: #ecdcc0;
+
+  --primary: #c1440e;
+  --primary-hover: #9c360a;
+  --on-primary: #ffffff;
+  --accent: #a9761c;
+  --on-accent: #2a1c12;
+  --brand-color: #c1440e;
+
+  --header-bg: #ffffff;
+  --footer-bg: #2b1408;
+  --footer-text: #ddc9b0;
+  --footer-heading: #ffffff;
+  --sidebar-bg: #2b1408;
+  --sidebar-text: #e3d2ba;
+  --sidebar-muted: #a68b6c;
+
+  --proto-bar-bg: #2b1408;
+  --proto-bar-text: #f6ecd9;
+
+  --success-bg: #e2f1e2; --success-text: #1f6e3d;
+  --warning-bg: #f8ecd2; --warning-text: #8a5c0a;
+  --neutral-bg: #f1e8d6; --neutral-text: #6b5c46;
+  --danger-bg: #f6e1de;  --danger-text: #9a3a24;
+
+  --avatar-0: #c1440e; --avatar-1: #a9761c; --avatar-2: #2e5a72;
+  --avatar-3: #7a3b2e; --avatar-4: #5c3d94; --avatar-5: #94472f;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --shadow-md: 0 8px 22px rgba(193, 68, 14, .16);
+
+  --font-heading: 'Marcellus', Georgia, serif;
+  --font-body: 'Mulish', 'Segoe UI', sans-serif;
+  --chart-line: #c1440e;
+
+  /* mobile app-style components */
+  --tabbar-bg: #ffffff;
+  --tabbar-text: #a68b6c;
+  --status-gradient: linear-gradient(135deg, #9c360a 0%, #c1440e 55%, #a9761c 100%);
+  --status-card-text: #ffffff;
+  --tint-a-bg: #f7e3d4; --tint-a-fg: #c1440e;
+  --tint-b-bg: #f3e6c4; --tint-b-fg: #8a5c0a;
+  --tint-c-bg: #eee3d2; --tint-c-fg: #6b5c46;
+}
+
+h1, h2, h3 { font-weight: 400; letter-spacing: .01em; }
+.eyebrow { font-family: var(--font-body); font-weight: 800; letter-spacing: .09em; text-transform: uppercase; font-size: .74rem; }
+.page-head h1::after, .content-page h1::after, .auth-card h1::after {
+  content: ''; display: block; width: 64px; height: 3px; margin-top: 12px;
+  background: var(--accent); position: relative;
+}
+.section-head h3 { font-weight: 400; }
+
+/* ---------- devotional strip above the header ----------
+   Many real Samaj/trust sites lead with a short invocation banner
+   above the main nav — this mirrors that convention in an original
+   band (gradient + our own wording), not copied from any site. */
+.devotional-strip {
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  color: #fff; text-align: center; font-family: var(--font-heading);
+  font-size: .82rem; letter-spacing: .04em; padding: 7px 12px;
+}
+.site-header { border-bottom: 1px solid var(--border); }
+.brand { text-transform: none; letter-spacing: 0; }
+.nav-link.active, .nav-link:hover { border-bottom-color: var(--accent); }
+
+.hero { position: relative; }
+.hero h1 { font-size: 2.35rem; line-height: 1.2; }
+.heritage-emblem {
+  width: 64px; height: 64px; margin: 0 auto 18px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--surface); border: 3px solid var(--accent);
+  box-shadow: 0 0 0 5px var(--bg-alt), var(--shadow-md);
+  color: var(--primary);
+}
+
+.mini-card, .stat-item, .auth-card, .approval-card, .faq-item, .empty-state {
+  border: 1px solid var(--border); box-shadow: none; border-radius: var(--radius-md);
+}
+.mini-card:hover { box-shadow: var(--shadow-md); border-color: var(--accent); }
+.mini-card-img--events { background: var(--primary); }
+.mini-card-img--gallery { background: var(--accent); color: var(--on-accent); }
+.stat-item b { color: var(--primary); font-family: var(--font-heading); font-weight: 400; }
+
+.btn { border-radius: var(--radius-sm); font-weight: 700; }
+.btn-primary { background: var(--primary); }
+.btn-primary:hover { background: var(--primary-hover); }
+.btn-ghost { border: 1px solid var(--accent); color: var(--primary); }
+.btn-ghost:hover { background: var(--bg-alt); }
+
+.sidebar-link.active { background: var(--primary); }
+.badge { border-radius: 4px; }
+.tab.active { color: var(--primary); border-bottom-color: var(--accent); }
+.switch.on { background: var(--primary); }
+
+/* ---------- notice ticker (bulletin-board strip) ---------- */
+.notice-ticker {
+  display: flex; align-items: center; gap: 16px;
+  background: var(--bg-alt); border: 1px solid var(--border); border-radius: var(--radius-sm);
+  padding: 10px 16px; margin-bottom: 40px;
+}
+.notice-ticker-label {
+  flex-shrink: 0; display: flex; align-items: center; gap: 6px;
+  font-weight: 800; font-size: .74rem; letter-spacing: .06em; text-transform: uppercase; color: var(--primary);
+}
+.notice-ticker-track {
+  flex: 1; overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.notice-ticker-content { display: flex; gap: 48px; white-space: nowrap; width: max-content; animation: notice-scroll 26s linear infinite; }
+.notice-ticker-item { cursor: pointer; font-size: .88rem; color: var(--text); }
+.notice-ticker-item:hover { color: var(--primary); }
+@keyframes notice-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .notice-ticker-content { animation: none; } }
+
+/* ---------- "Our Heritage" teaser: text + milestone timeline ----------
+   Background is an original warm glow + dot-mandala texture (no copied
+   imagery). To use an actual devotional photo instead — e.g. your own
+   licensed photo of Umiya Mataji — replace the two gradient layers
+   below with: url('your-image.jpg') center/cover no-repeat, and keep the
+   white wash layer first (or raise its opacity) so the text stays readable. */
+.heritage-teaser {
+  position: relative; margin: 0 0 44px; padding: 40px 36px;
+  border-radius: var(--radius-lg); overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.93), rgba(255,255,255,.88)),
+    radial-gradient(circle at 12% 15%, rgba(193,68,14,.20), transparent 55%),
+    radial-gradient(circle at 90% 85%, rgba(169,118,28,.16), transparent 50%),
+    var(--bg-alt);
+}
+.heritage-teaser::before {
+  content: ''; position: absolute; inset: 0; opacity: .08; pointer-events: none;
+  background-image: radial-gradient(circle, var(--primary) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+}
+.heritage-teaser .two-col { position: relative; z-index: 1; }
+.heritage-dedication {
+  display: block; font-family: var(--font-heading); color: var(--primary);
+  font-size: 1.1rem; margin-bottom: 8px; letter-spacing: .02em;
+}
+.heritage-teaser h2 { font-size: 1.6rem; margin: .2em 0 .5em; }
+.heritage-teaser .btn { margin-top: 6px; }
+.heritage-timeline { position: relative; padding-left: 22px; border-left: 2px solid var(--border); display: flex; flex-direction: column; gap: 20px; }
+.heritage-timeline-item { position: relative; }
+.heritage-timeline-item::before {
+  content: ''; position: absolute; left: -27px; top: 3px; width: 10px; height: 10px;
+  border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px var(--bg);
+}
+.htl-year { display: block; font-family: var(--font-heading); color: var(--primary); font-size: 1.15rem; }
+.htl-label { color: var(--text-muted); font-size: .9rem; }
+
+/* ---------- committee spotlight ---------- */
+.committee-spotlight { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.committee-card {
+  text-align: center; padding: 22px 14px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-md); cursor: pointer; transition: box-shadow .12s ease, border-color .12s ease;
+}
+.committee-card:hover { box-shadow: var(--shadow-md); border-color: var(--accent); }
+.committee-card .avatar { margin: 0 auto 12px; }
+.committee-card h4 { margin-bottom: .3em; }
+.committee-role {
+  display: inline-block; background: var(--tint-b-bg, var(--bg-alt)); color: var(--tint-b-fg, var(--accent));
+  font-size: .72rem; font-weight: 700; letter-spacing: .03em; text-transform: uppercase;
+  padding: .25em .7em; border-radius: 999px; margin-bottom: .4em;
+}
+
+/* ---------- download rows (home teaser + Download Center page) ---------- */
+.download-row-main { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.download-row-main h4 { margin-bottom: .1em; }
+.download-row { cursor: pointer; }
+
+/* ---------- join CTA band ---------- */
+.cta-band {
+  background: linear-gradient(120deg, var(--primary) 0%, var(--primary-hover) 100%);
+  border-radius: var(--radius-lg); padding: 36px 34px; margin: 8px 0 44px; color: #fff;
+}
+.cta-band-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.cta-band h2 { color: #fff; font-size: 1.5rem; margin-bottom: .2em; }
+.cta-band p { color: rgba(255,255,255,.82); margin: 0; }
+.cta-band-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.cta-band .btn-primary { background: #fff; color: var(--primary); }
+.cta-band .btn-primary:hover { background: #f1efe4; }
+.cta-band .btn-ghost { background: transparent; border-color: rgba(255,255,255,.6); color: #fff; }
+.cta-band .btn-ghost:hover { background: rgba(255,255,255,.12); border-color: #fff; color: #fff; }
+
+@media (max-width: 720px) {
+  .committee-spotlight { grid-template-columns: 1fr 1fr; }
+  .heritage-timeline { padding-left: 18px; }
+  .cta-band { padding: 26px 20px; }
+  .cta-band-inner { flex-direction: column; align-items: flex-start; }
+  .notice-ticker-label span { display: none; }
+}
